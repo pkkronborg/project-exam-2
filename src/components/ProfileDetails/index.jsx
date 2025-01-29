@@ -25,9 +25,6 @@ function ProfileDetails() {
     fetchProfile();
   }, [name]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
   const handleChangePicture = async (newAvatarUrl) => {
     try {
       await updateProfile(name, { avatar: { url: newAvatarUrl } });
@@ -42,32 +39,46 @@ function ProfileDetails() {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center vh-100">
-      <h1 className="fw-bold my-5">{profile.name}</h1>
-      <p className="text-muted">{profile.email}</p>
+    <div className="text-center">
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center vh-100">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="text-center mt-4 alert alert-danger">{error}</div>
+      ) : (
+        <>
+          <div className="d-flex flex-column align-items-center vh-100">
+            <h1 className="fw-bold my-4">{profile.name}</h1>
+            <p className="text-muted">{profile.email}</p>
 
-      {profile?.avatar?.url && (
-        <img
-          className="img-fluid rounded shadow my-3"
-          src={profile.avatar.url}
-          alt={profile.avatar.alt || "Profile image"}
-          style={{ width: "250px", height: "250px", objectFit: "cover" }}
-        />
-      )}
+            {profile?.avatar?.url && (
+              <img
+                className="img-fluid rounded shadow my-3"
+                src={profile.avatar.url}
+                alt={profile.avatar.alt || "Profile image"}
+                style={{ width: "250px", height: "250px", objectFit: "cover" }}
+              />
+            )}
 
-      <button
-        className="btn btn-success mt-3 px-4"
-        onClick={() => setIsModalOpen(true)}
-      >
-        Change Avatar
-      </button>
+            <button
+              className="btn btn-success mt-3 px-4"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Change Avatar
+            </button>
 
-      {isModalOpen && (
-        <ProfileModal
-          currentAvatar={profile.avatar?.url}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleChangePicture}
-        />
+            {isModalOpen && (
+              <ProfileModal
+                currentAvatar={profile.avatar?.url}
+                onClose={() => setIsModalOpen(false)}
+                onSave={handleChangePicture}
+              />
+            )}
+          </div>
+        </>
       )}
     </div>
   );

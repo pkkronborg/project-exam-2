@@ -45,9 +45,23 @@ function VenueDetails({ isLoggedIn }) {
     fetchVenueDetails();
   }, [fetchVenueDetails]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!data) return <div>No venue data available</div>;
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center mt-4 alert alert-danger">{error}</div>;
+  }
+
+  if (!data) {
+    return <h3 className="mt-4">No venue data available</h3>;
+  }
 
   const maxGuests = data?.maxGuests || 1;
 
@@ -141,7 +155,7 @@ function VenueDetails({ isLoggedIn }) {
                   >
                     <img
                       src={image.url}
-                      className="d-block w-100 img-fluid object-fit-cover"
+                      className="d-block w-100 img-fluid object-fit-cover rounded"
                       alt={image.alt || "Venue image"}
                     />
                   </div>
@@ -179,36 +193,40 @@ function VenueDetails({ isLoggedIn }) {
           )}
         </div>
 
-        <div className="col-md-6 d-flex align-items-center flex-column">
-          <BookingCalendar
-            bookings={data.bookings || []}
-            isLoggedIn={isLoggedIn}
-            onDateChange={setSelectedRange}
-          />
-          <p>
-            {selectedRange?.[0]?.toLocaleDateString()} -{" "}
-            {selectedRange?.[1]?.toLocaleDateString() ||
-              selectedRange?.[0]?.toLocaleDateString()}
-          </p>
-          <div className="mb-3 d-flex justify-content-between align-items-center">
-            <label htmlFor="guestCount">Guests</label>
-            <input
-              type="number"
-              id="guestCount"
-              className="form-control w-50 text-center"
-              min="1"
-              max={maxGuests}
-              value={guestCount}
-              onChange={handleGuestChange}
-            />
+        <div className="col-md-6 d-flex align-items-center justify-content-center">
+          <div className="card shadow-sm">
+            <div className="card-body d-flex flex-column align-items-center">
+              <BookingCalendar
+                bookings={data.bookings || []}
+                isLoggedIn={isLoggedIn}
+                onDateChange={setSelectedRange}
+              />
+              <p>
+                {selectedRange?.[0]?.toLocaleDateString()} -{" "}
+                {selectedRange?.[1]?.toLocaleDateString() ||
+                  selectedRange?.[0]?.toLocaleDateString()}
+              </p>
+              <div className="mb-3 d-flex justify-content-between align-items-center">
+                <label htmlFor="guestCount">Guests</label>
+                <input
+                  type="number"
+                  id="guestCount"
+                  className="form-control w-50 text-center"
+                  min="1"
+                  max={maxGuests}
+                  value={guestCount}
+                  onChange={handleGuestChange}
+                />
+              </div>
+              <div className="d-flex justify-content-between fw-bold">
+                <span>Total Price:</span>
+                <span>${calculateTotalPrice()}</span>
+              </div>
+              <button className="btn btn-primary mt-3" onClick={handleBookNow}>
+                Book now!
+              </button>
+            </div>
           </div>
-          <div className="d-flex justify-content-between fw-bold">
-            <span>Total Price:</span>
-            <span>${calculateTotalPrice()}</span>
-          </div>
-          <button className="btn btn-primary mt-3" onClick={handleBookNow}>
-            Book now!
-          </button>
         </div>
       </div>
 

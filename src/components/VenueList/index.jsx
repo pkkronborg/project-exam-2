@@ -39,7 +39,6 @@ function VenueList() {
     getVenues(searchQuery, currentPage);
   }, [searchQuery, currentPage]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   const handleSearch = (e) => {
@@ -61,16 +60,16 @@ function VenueList() {
   };
 
   const renderStars = (rating) => {
-    const totalStars = 5; // Define the total number of stars
+    const totalStars = 5;
     let stars = "";
     for (let i = 1; i <= totalStars; i++) {
-      stars += i <= rating ? "★" : "☆"; // Filled star if within rating, otherwise empty star
+      stars += i <= rating ? "★" : "☆";
     }
     return stars;
   };
 
   return (
-    <div className=" mt-4">
+    <div className="mt-5">
       {
         <form
           className="mb-4 d-flex justify-content-center"
@@ -92,9 +91,9 @@ function VenueList() {
       }
 
       {loading ? (
-        <div className="text-center mt-4">
+        <div className="text-center">
           <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden mt-4">Loading...</span>
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       ) : error ? (
@@ -102,10 +101,10 @@ function VenueList() {
       ) : data.length === 0 ? (
         <h3 className="mt-4">No venues found</h3>
       ) : (
-        <div className="row row-cols-1 row-cols-md-3 g-4 mx-0">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mx-0">
           {data.map((venue) => {
             return (
-              <div key={venue.id} className="col-md-4 mb-3">
+              <div key={venue.id} className="col mb-3">
                 <div className="card h-100 shadow-sm">
                   {venue.media[0] && venue.media[0].url && (
                     <img
@@ -130,12 +129,11 @@ function VenueList() {
                       </span>
                     </div>
                   </div>
-                  <Link
-                    className="d-flex justify-content-center pb-3"
-                    to={`venue/${venue.id}`}
-                  >
-                    <div className="btn btn-primary">View venue</div>
-                  </Link>
+                  <div className="text-center pb-3">
+                    <Link to={`venue/${venue.id}`}>
+                      <button className="btn btn-primary">View venue</button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             );

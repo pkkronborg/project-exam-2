@@ -1,0 +1,28 @@
+body {
+  background-color: #f5f5f5;
+  overflow-y: scroll;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  opacity: 0.7;
+}
+
+body {
+  font-family: "Open sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2 {
+  font-family: "Montserrat", sans-serif;
+}

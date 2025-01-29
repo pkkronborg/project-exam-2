@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #2d6b2d;
+  --primary-color-rgb: 45, 107, 45;
+}
+
+:root {
+  --bs-primary: var(--primary-color) !important;
+  --bs-primary-rgb: var(--primary-color-rgb) !important;
+  --bs-secondary: #33ffbd;
+  --bs-success: #212723;
+  --bs-info: #17a2b8;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-btn-active-bg: var(--primary-color-rgb) !important;
+  --bs-link-color-rgb: var(--primary-color-rgb) !important;
+  --bs-btn-bg: var(--primary-color) !important;
+}

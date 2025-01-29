@@ -23,7 +23,7 @@ function LoginForm({ onSubmit }) {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div className="w-50">
-        <h1 className="text-center mt-5">Register</h1>
+        <h1 className="text-center mt-5">Log in</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Email Field */}
           <div className="form-group">

@@ -1,9 +1,10 @@
 import React from "react";
 import { createVenue } from "../../api/venues";
 import CreateVenueForm from "../CreateVenueForm";
+import "../../styles/modal.css";
 
 function CreateVenueModal({ show, handleClose, onVenueCreated }) {
-  if (!show) return null; // Render nothing if modal is not visible
+  if (!show) return null;
 
   const handleSubmit = async (data) => {
     try {

@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React from "react";
-
 import { useAuth } from "../../state/auth";
+import "./styles.css";
 
 function Nav({ onRegisterClick, onLoginClick }) {
   const { isLoggedIn, venueManager, logout } = useAuth();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -24,19 +25,25 @@ function Nav({ onRegisterClick, onLoginClick }) {
       <ul className="nav ms-auto">
         {navItems
           .filter((item) => item.show)
-          .map((item, index) => (
-            <li className="nav-item" key={index}>
-              {item.path ? (
-                <Link className="nav-link" to={item.path}>
-                  {item.label}
-                </Link>
-              ) : (
-                <button className="btn nav-link" onClick={item.action}>
-                  {item.label}
-                </button>
-              )}
-            </li>
-          ))}
+          .map((item, index) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <li className="nav-item" key={index}>
+                {item.path ? (
+                  <Link
+                    className={`nav-link ${isActive ? "active" : ""}`}
+                    to={item.path}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button className="btn nav-link" onClick={item.action}>
+                    {item.label}
+                  </button>
+                )}
+              </li>
+            );
+          })}
       </ul>
     </nav>
   );
@@ -44,7 +51,7 @@ function Nav({ onRegisterClick, onLoginClick }) {
 
 function Header({ onRegisterClick, onLoginClick }) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav className="navbar navbar-expand-lg bg-primary fixed-top">
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">
           Holidaze
