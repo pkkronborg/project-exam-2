@@ -1,0 +1,25 @@
+.booking-calendar {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .booking-calendar {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .venue-section {
+    margin-bottom: 20px; /* Adds space between sections */
+  }
+
+  .venue-image {
+    margin-bottom: 15px; /* Space between image and calendar */
+  }
+
+  .venue-info {
+    padding: 10px 12px; /* Adds padding around text areas */
+  }
+}

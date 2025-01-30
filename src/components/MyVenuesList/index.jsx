@@ -46,7 +46,7 @@ function MyVenuesList() {
 
   return (
     <div className="container px-0">
-      <h1 className="my-4 text-center">My Venues</h1>
+      <h1 className="my-5 text-center fw-bold">My Venues</h1>
       <div className="d-flex justify-content-start ps-1">
         <button
           className="btn btn-success mb-4 ms-2"

@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 
 function VenueBookings({ bookings }) {
   if (!bookings || bookings.length === 0) {
@@ -21,8 +22,20 @@ function VenueBookings({ bookings }) {
             <tr key={booking.id}>
               <td>{booking.customer.name}</td>
               <td>{booking.guests}</td>
-              <td>{new Date(booking.dateFrom).toLocaleDateString()}</td>
-              <td>{new Date(booking.dateTo).toLocaleDateString()}</td>
+              <td>
+                {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
+                  year: "2-digit",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
+              </td>
+              <td>
+                {new Date(booking.dateTo).toLocaleDateString("en-GB", {
+                  year: "2-digit",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
+              </td>
             </tr>
           ))}
         </tbody>

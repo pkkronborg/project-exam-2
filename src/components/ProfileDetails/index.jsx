@@ -51,7 +51,7 @@ function ProfileDetails() {
       ) : (
         <>
           <div className="d-flex flex-column align-items-center vh-100">
-            <h1 className="fw-bold my-4">{profile.name}</h1>
+            <h1 className="fw-bold my-5">{profile.name}</h1>
             <p className="text-muted">{profile.email}</p>
 
             {profile?.avatar?.url && (

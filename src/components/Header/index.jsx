@@ -1,14 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../state/auth";
 import "./styles.css";
 
-function Nav({ onRegisterClick, onLoginClick }) {
+function Nav({ onRegisterClick, onLoginClick, closeMenu }) {
   const { isLoggedIn, venueManager, logout } = useAuth();
   const location = useLocation();
 
   const handleLogout = () => {
     logout();
+    closeMenu();
   };
 
   const navItems = [
@@ -33,6 +34,7 @@ function Nav({ onRegisterClick, onLoginClick }) {
                   <Link
                     className={`nav-link ${isActive ? "active" : ""}`}
                     to={item.path}
+                    onClick={closeMenu}
                   >
                     {item.label}
                   </Link>
@@ -50,30 +52,37 @@ function Nav({ onRegisterClick, onLoginClick }) {
 }
 
 function Header({ onRegisterClick, onLoginClick }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-primary fixed-top">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
+        <Link className="navbar-brand fw-bold" to="/" onClick={closeMenu}>
           Holidaze
         </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button className="navbar-toggler" type="button" onClick={toggleMenu}>
           <span className="navbar-toggler-icon"></span>
         </button>
 
         <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
+          className={`collapse navbar-collapse justify-content-end ${
+            isOpen ? "show" : ""
+          }`}
         >
-          <Nav onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} />
+          <Nav
+            onRegisterClick={onRegisterClick}
+            onLoginClick={onLoginClick}
+            closeMenu={closeMenu}
+          />
         </div>
       </div>
     </nav>

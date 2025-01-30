@@ -58,4 +58,8 @@
     width: 100%;
     padding: 12px 20px;
   }
+
+  .navbar-collapse {
+    transition: all 0.3s ease-in-out;
+  }
 }

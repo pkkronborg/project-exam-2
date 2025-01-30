@@ -35,7 +35,7 @@ function Bookings() {
 
   return (
     <div className="container">
-      <h1 className="my-4 text-center">My bookings</h1>
+      <h1 className="my-5 text-center fw-bold">My bookings</h1>
       {loading ? (
         <div className="text-center">
           <div className="spinner-border text-primary" role="status">

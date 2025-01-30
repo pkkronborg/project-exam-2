@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import { getAllVenues, getVenuesBySearch } from "../../api/venues";
+import "./styles.css";
 
 function VenueList() {
   const [data, setData] = useState([]);
@@ -75,7 +75,7 @@ function VenueList() {
           className="mb-4 d-flex justify-content-center"
           onSubmit={handleSearch}
         >
-          <div className="input-group w-50 w-md-25">
+          <div className="input-group w-50">
             <input
               type="text"
               className="form-control"

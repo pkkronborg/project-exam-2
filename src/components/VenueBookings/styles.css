@@ -1,0 +1,11 @@
+@media (max-width: 320px) {
+  .table {
+    font-size: 10px;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px;
+    word-break: break-word;
+  }
+}

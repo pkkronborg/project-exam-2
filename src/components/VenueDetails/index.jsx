@@ -13,6 +13,7 @@ import {
   FaUsers,
   FaWifi,
 } from "react-icons/fa";
+import "./styles.css";
 
 function VenueDetails({ isLoggedIn }) {
   const [data, setData] = useState(null);
@@ -60,7 +61,7 @@ function VenueDetails({ isLoggedIn }) {
   }
 
   if (!data) {
-    return <h3 className="mt-4">No venue data available</h3>;
+    return <h3 className="mt-4 text-center">No venue data available</h3>;
   }
 
   const maxGuests = data?.maxGuests || 1;
@@ -121,7 +122,7 @@ function VenueDetails({ isLoggedIn }) {
 
   return (
     <div className="mt-4">
-      <h1 className="my-4">{data.name}</h1>
+      <h1 className="my-5 text-center fw-bold">{data.name}</h1>
       {venueManager === "true" && name === data.owner?.name && (
         <div className="d-flex justify-content-start gap-2 my-3">
           <button
@@ -140,7 +141,7 @@ function VenueDetails({ isLoggedIn }) {
       )}
 
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 venue-section venue-image">
           {data.media?.length > 0 ? (
             <div
               id="venueCarousel"
@@ -196,11 +197,13 @@ function VenueDetails({ isLoggedIn }) {
         <div className="col-md-6 d-flex align-items-center justify-content-center">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column align-items-center">
-              <BookingCalendar
-                bookings={data.bookings || []}
-                isLoggedIn={isLoggedIn}
-                onDateChange={setSelectedRange}
-              />
+              <div className="booking-calendar">
+                <BookingCalendar
+                  bookings={data.bookings || []}
+                  isLoggedIn={isLoggedIn}
+                  onDateChange={setSelectedRange}
+                />
+              </div>
               <p>
                 {selectedRange?.[0]?.toLocaleDateString()} -{" "}
                 {selectedRange?.[1]?.toLocaleDateString() ||
@@ -232,7 +235,7 @@ function VenueDetails({ isLoggedIn }) {
 
       <div className="row">
         <h2 className="my-4">About this property</h2>
-        <div className="col-md-3 text-start">
+        <div className="col-md-3 text-start venue-section venue-info">
           <p>
             <FaUsers className="me-2 fs-5" /> {maxGuests} Guests allowed
           </p>
@@ -253,7 +256,7 @@ function VenueDetails({ isLoggedIn }) {
             {data?.meta?.breakfast ? "Breakfast included" : "No breakfast"}
           </p>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-3 venue-section venue-info">
           <p className="fw-bold">
             <FaMapMarkerAlt className="me-2 fs-5" /> Location
           </p>
@@ -269,7 +272,8 @@ function VenueDetails({ isLoggedIn }) {
             <p>No location</p>
           )}
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 venue-section venue-info">
+          <p className="fw-bold">Description</p>
           <p>{data.description}</p>
         </div>
       </div>

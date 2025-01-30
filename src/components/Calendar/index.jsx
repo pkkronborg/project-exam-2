@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "./styles.css";
 
 function BookingCalendar({ bookings, isLoggedIn, onDateChange }) {
   const [bookedDates, setBookedDates] = useState([]);
@@ -53,6 +54,9 @@ function BookingCalendar({ bookings, isLoggedIn, onDateChange }) {
         tileDisabled={({ date }) => isDateDisabled(date)}
         onChange={handleDateChange}
         minDate={today}
+        tileClassName={({ date }) => {
+          return date.getDay() === 0 ? "sunday" : "";
+        }}
       />
     </div>
   );
