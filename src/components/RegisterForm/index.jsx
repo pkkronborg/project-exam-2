@@ -26,7 +26,7 @@ const schema = yup
   })
   .required();
 
-function RegisterForm({ onSubmit }) {
+function RegisterForm({ onSubmit, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -82,6 +82,10 @@ function RegisterForm({ onSubmit }) {
             id="venueManager"
           />
         </div>
+
+        {errorMessage && (
+          <p className="text-danger text-center mt-3">{errorMessage}</p>
+        )}
 
         {/* Submit Button */}
         <div className="d-flex justify-content-center align-items-center mt-4">

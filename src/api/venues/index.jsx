@@ -19,7 +19,6 @@ export async function createVenue(data) {
       Authorization: `Bearer ${accessToken}`,
       "X-Noroff-API-Key": "8c35aa6e-85b0-4670-96b8-6d1763511936",
     },
-    body: JSON.stringify(data),
   });
   return handleResponse(response);
 }
@@ -32,7 +31,6 @@ export async function updateVenue(data, id) {
       Authorization: `Bearer ${accessToken}`,
       "X-Noroff-API-Key": "8c35aa6e-85b0-4670-96b8-6d1763511936",
     },
-    body: JSON.stringify(data),
   });
   return handleResponse(response);
 }

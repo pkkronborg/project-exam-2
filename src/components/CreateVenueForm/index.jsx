@@ -10,14 +10,20 @@ const schema = yup
     description: yup.string().required("Description is required"),
     media: yup.string().required("At least one image URL is required"),
     price: yup
-      .number()
+      .number("Price must be a number")
       .positive("Price must be positive")
-      .required("Price is required"),
+      .required("Price is required")
+      .transform((value, originalValue) =>
+        originalValue.trim() === "" ? undefined : value
+      ),
     maxGuests: yup
-      .number()
-      .positive("Max Guests must be positive")
-      .integer("Max Guests must be an integer")
-      .required("Max Guests is required"),
+      .number("Guests be a number")
+      .positive("Guests must be positive")
+      .integer("Guests must be an integer")
+      .required("Guests is required")
+      .transform((value, originalValue) =>
+        originalValue.trim() === "" ? undefined : value
+      ),
     wifi: yup.boolean().default(false),
     parking: yup.boolean().default(false),
     breakfast: yup.boolean().default(false),
@@ -28,7 +34,7 @@ const schema = yup
   })
   .required();
 
-function CreateVenueForm({ onSubmit }) {
+function CreateVenueForm({ onSubmit, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -172,6 +178,10 @@ function CreateVenueForm({ onSubmit }) {
           </div>
         </div>
       </div>
+
+      {errorMessage && (
+        <p className="text-danger text-center mt-3">{errorMessage}</p>
+      )}
 
       <div className="d-flex justify-content-center mt-4">
         <button className="btn btn-primary px-4" type="submit">

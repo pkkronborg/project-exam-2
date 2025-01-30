@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import RegisterForm from "../RegisterForm";
 import { register } from "../../api/auth";
 
 function RegisterModal({ show, handleClose }) {
-  console.log("Modal visibility:", show);
+  const [errorMessage, setErrorMessage] = useState("");
   if (!show) return null; // Render nothing if the modal is not visible
 
   const handleSubmit = async (data) => {
+    setErrorMessage("");
     try {
       const response = await register(data);
       console.log("Registration successful:", response);
-      alert("You have successfully registered!");
       handleClose();
     } catch (error) {
-      console.error("Registration failed:", error.message);
-      alert(error.message);
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
     }
   };
 
@@ -37,7 +39,7 @@ function RegisterModal({ show, handleClose }) {
           </div>
           <div className="modal-body">
             <h2 className="text-center mb-4">Register</h2>
-            <RegisterForm onSubmit={handleSubmit} />
+            <RegisterForm onSubmit={handleSubmit} errorMessage={errorMessage} />
           </div>
         </div>
       </div>

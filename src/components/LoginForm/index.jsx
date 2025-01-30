@@ -11,7 +11,7 @@ const schema = yup
   })
   .required();
 
-function LoginForm({ onSubmit }) {
+function LoginForm({ onSubmit, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -45,6 +45,10 @@ function LoginForm({ onSubmit }) {
           />
           <p className="text-danger">{errors.password?.message}</p>
         </div>
+
+        {errorMessage && (
+          <p className="text-danger text-center mt-3">{errorMessage}</p>
+        )}
 
         {/* Submit Button */}
         <div className="d-flex justify-content-center align-items-center mt-4">

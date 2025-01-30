@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import EditVenueForm from "../EditVenueForm";
 import "../../styles/modal.css";
+import { updateVenue } from "../../api/venues";
 
 function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
+  const [errorMessage, setErrorMessage] = useState("");
   if (!show) return null;
 
-  const handleFormSubmit = (formData) => {
-    onSubmit(formData);
-    handleClose();
+  const handleFormSubmit = async (formData) => {
+    setErrorMessage("");
+    try {
+      await updateVenue(formData);
+      handleClose();
+    } catch (error) {
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
   };
 
   return (
@@ -31,6 +41,7 @@ function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
             <EditVenueForm
               initialValues={initialValues}
               onSubmit={handleFormSubmit}
+              errorMessage={errorMessage}
             />
           </div>
         </div>

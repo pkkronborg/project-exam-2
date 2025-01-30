@@ -5,17 +5,30 @@ import * as yup from "yup";
 
 // Validation Schema
 const schema = yup.object().shape({
-  name: yup.string().optional(),
-  description: yup.string().optional(),
+  name: yup.string().required("Venue Name is required"),
+  description: yup.string().required("Description is required"),
   media: yup.string().required("At least one image URL is required"),
-  price: yup.number().positive("Price must be positive").optional(),
+  price: yup
+    .number("Price must be a number")
+    .positive("Price must be positive")
+    .required("Price is required")
+    .transform((value, originalValue) =>
+      typeof originalValue === "string" && originalValue.trim() === ""
+        ? undefined
+        : value
+    ),
   maxGuests: yup
-    .number()
-    .positive("Must be positive")
-    .integer("Must be an integer")
-    .optional(),
+    .number("Guests must be a number")
+    .positive("Guests must be positive")
+    .integer("Guests must be an integer")
+    .required("Guests is required")
+    .transform((value, originalValue) =>
+      typeof originalValue === "string" && originalValue.trim() === ""
+        ? undefined
+        : value
+    ),
   rating: yup
-    .number()
+    .number("Rating must be a number")
     .min(0, "Rating cannot be negative")
     .max(5, "Rating cannot exceed 5")
     .optional(),
@@ -26,13 +39,13 @@ const schema = yup.object().shape({
     pets: yup.boolean().optional(),
   }),
   location: yup.object().shape({
-    address: yup.string().optional(),
-    city: yup.string().optional(),
-    country: yup.string().optional(),
+    address: yup.string().notRequired(),
+    city: yup.string().notRequired(),
+    country: yup.string().notRequired(),
   }),
 });
 
-function EditVenueForm({ initialValues, onSubmit }) {
+function EditVenueForm({ initialValues, onSubmit, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -180,6 +193,10 @@ function EditVenueForm({ initialValues, onSubmit }) {
           </div>
         </div>
       </div>
+
+      {errorMessage && (
+        <p className="text-danger text-center mt-3">{errorMessage}</p>
+      )}
 
       <div className="d-flex justify-content-center mt-4">
         <button className="btn btn-primary px-4" type="submit">

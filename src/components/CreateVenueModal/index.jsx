@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { createVenue } from "../../api/venues";
 import CreateVenueForm from "../CreateVenueForm";
 import "../../styles/modal.css";
+import { useNavigate } from "react-router-dom";
 
 function CreateVenueModal({ show, handleClose, onVenueCreated }) {
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   if (!show) return null;
 
   const handleSubmit = async (data) => {
+    setErrorMessage("");
     try {
       await createVenue(data);
       onVenueCreated();
       handleClose();
+      navigate("../profile/myVenues");
     } catch (error) {
-      alert(error.message);
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
     }
   };
 
@@ -36,7 +44,10 @@ function CreateVenueModal({ show, handleClose, onVenueCreated }) {
 
           <div className="modal-body">
             <h2 className="text-center mb-4">Create Venue</h2>
-            <CreateVenueForm onSubmit={handleSubmit} />
+            <CreateVenueForm
+              onSubmit={handleSubmit}
+              errorMessage={errorMessage}
+            />
           </div>
         </div>
       </div>

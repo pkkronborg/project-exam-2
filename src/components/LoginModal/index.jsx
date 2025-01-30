@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { login } from "../../api/auth";
 import LoginForm from "../LoginForm";
 import { useAuth } from "../../state/auth";
 
 function LoginModal({ show, handleClose }) {
   const { login: authLogin } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   if (!show) return null; // Render nothing if the modal is not visible
 
   const handleSubmit = async (data) => {
+    setErrorMessage("");
     try {
       const response = await login(data);
       authLogin(response.data);
       handleClose();
     } catch (error) {
-      alert(error.message);
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
     }
   };
 
@@ -37,7 +42,7 @@ function LoginModal({ show, handleClose }) {
 
           <div className="modal-body">
             <h2 className="text-center mb-4">Log In</h2>
-            <LoginForm onSubmit={handleSubmit} />
+            <LoginForm onSubmit={handleSubmit} errorMessage={errorMessage} />
           </div>
         </div>
       </div>
