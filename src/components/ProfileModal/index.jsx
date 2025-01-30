@@ -11,7 +11,7 @@ const schema = yup.object().shape({
     .required("New picture URL is required"),
 });
 
-function ProfileModal({ currentAvatar, onClose, onSave }) {
+function ProfileModal({ currentAvatar, onClose, onSave, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -49,6 +49,10 @@ function ProfileModal({ currentAvatar, onClose, onSave }) {
                 />
                 <p className="text-danger">{errors.newAvatarUrl?.message}</p>
               </div>
+
+              {errorMessage && (
+                <p className="text-danger text-center mt-3">{errorMessage}</p>
+              )}
               <div className="mt-3 d-flex justify-content-center">
                 <button type="submit" className="btn btn-primary px-4">
                   Save

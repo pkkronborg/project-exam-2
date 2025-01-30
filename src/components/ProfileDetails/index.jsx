@@ -5,6 +5,7 @@ import ProfileModal from "../ProfileModal";
 function ProfileDetails() {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
+  const [modalError, setModalError] = useState("");
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const name = localStorage.getItem("name");
@@ -26,22 +27,26 @@ function ProfileDetails() {
   }, [name]);
 
   const handleChangePicture = async (newAvatarUrl) => {
+    setModalError("");
     try {
       await updateProfile(name, { avatar: { url: newAvatarUrl } });
       setProfile((prevProfile) => ({
         ...prevProfile,
         avatar: { ...prevProfile.avatar, url: newAvatarUrl },
       }));
+      setIsModalOpen(false);
     } catch (error) {
-      setError(error.message);
+      setModalError(error.message);
+      setTimeout(() => {
+        setModalError("");
+      }, 5000);
     }
-    setIsModalOpen(false);
   };
 
   return (
     <div className="text-center">
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center align-items-center">
           <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
@@ -50,7 +55,7 @@ function ProfileDetails() {
         <div className="text-center mt-4 alert alert-danger">{error}</div>
       ) : (
         <>
-          <div className="d-flex flex-column align-items-center vh-100">
+          <div className="d-flex flex-column align-items-center">
             <h1 className="fw-bold my-5">{profile.name}</h1>
             <p className="text-muted">{profile.email}</p>
 
@@ -75,6 +80,7 @@ function ProfileDetails() {
                 currentAvatar={profile.avatar?.url}
                 onClose={() => setIsModalOpen(false)}
                 onSave={handleChangePicture}
+                errorMessage={modalError}
               />
             )}
           </div>
