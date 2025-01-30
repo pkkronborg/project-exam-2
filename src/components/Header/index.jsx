@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useAuth } from "../../state/auth";
 import "./styles.css";
@@ -6,10 +6,12 @@ import "./styles.css";
 function Nav({ onRegisterClick, onLoginClick, closeMenu }) {
   const { isLoggedIn, venueManager, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     closeMenu();
+    navigate("/");
   };
 
   const navItems = [

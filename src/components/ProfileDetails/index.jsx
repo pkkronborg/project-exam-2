@@ -64,7 +64,7 @@ function ProfileDetails() {
             )}
 
             <button
-              className="btn btn-success mt-3 px-4"
+              className="btn btn-primary mt-3 px-4"
               onClick={() => setIsModalOpen(true)}
             >
               Change Avatar

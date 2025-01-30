@@ -23,7 +23,7 @@ function CreateVenueModal({ show, handleClose, onVenueCreated }) {
       tabIndex="-1"
       aria-labelledby="registerVenueModal"
     >
-      <div className="modal-dialog modal-lg modal-dialog-centered">
+      <div className="modal-dialog modal-xl modal-dialog-centered">
         <div className="modal-content p-4">
           <div className="modal-header border-0">
             <button
@@ -35,7 +35,7 @@ function CreateVenueModal({ show, handleClose, onVenueCreated }) {
           </div>
 
           <div className="modal-body">
-            <h2 className="text-center mb-4">Register Venue</h2>
+            <h2 className="text-center mb-4">Create Venue</h2>
             <CreateVenueForm onSubmit={handleSubmit} />
           </div>
         </div>

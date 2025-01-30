@@ -50,7 +50,7 @@ function ProfileModal({ currentAvatar, onClose, onSave }) {
                 <p className="text-danger">{errors.newAvatarUrl?.message}</p>
               </div>
               <div className="mt-3 d-flex justify-content-center">
-                <button type="submit" className="btn btn-success px-4">
+                <button type="submit" className="btn btn-primary px-4">
                   Save
                 </button>
                 <button

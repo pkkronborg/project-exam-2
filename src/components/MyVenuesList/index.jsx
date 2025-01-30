@@ -33,7 +33,7 @@ function MyVenuesList() {
     fetchBookings();
   };
 
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className="my-5 text-center">Error: {error}</div>;
 
   const renderStars = (rating) => {
     const totalStars = 5;
@@ -49,7 +49,7 @@ function MyVenuesList() {
       <h1 className="my-5 text-center fw-bold">My Venues</h1>
       <div className="d-flex justify-content-start ps-1">
         <button
-          className="btn btn-success mb-4 ms-2"
+          className="btn btn-primary mb-4 ms-2"
           onClick={() => setIsModalOpen(true)}
         >
           Add Venue

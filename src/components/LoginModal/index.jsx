@@ -24,7 +24,7 @@ function LoginModal({ show, handleClose }) {
       tabIndex="-1"
       aria-labelledby="loginModalLabel"
     >
-      <div className="modal-dialog modal-lg modal-dialog-centered">
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content p-4">
           <div className="modal-header border-0">
             <button
@@ -36,6 +36,7 @@ function LoginModal({ show, handleClose }) {
           </div>
 
           <div className="modal-body">
+            <h2 className="text-center mb-4">Log In</h2>
             <LoginForm onSubmit={handleSubmit} />
           </div>
         </div>

@@ -174,7 +174,7 @@ function CreateVenueForm({ onSubmit }) {
       </div>
 
       <div className="d-flex justify-content-center mt-4">
-        <button className="btn btn-success px-4" type="submit">
+        <button className="btn btn-primary px-4" type="submit">
           Register
         </button>
       </div>

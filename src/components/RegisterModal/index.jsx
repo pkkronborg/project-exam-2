@@ -26,11 +26,8 @@ function RegisterModal({ show, handleClose }) {
       aria-labelledby="registerModalLabel"
     >
       <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="registerModalLabel">
-              Register
-            </h5>
+        <div className="modal-content p-4">
+          <div className="modal-header border-0">
             <button
               type="button"
               className="btn-close"
@@ -39,6 +36,7 @@ function RegisterModal({ show, handleClose }) {
             ></button>
           </div>
           <div className="modal-body">
+            <h2 className="text-center mb-4">Register</h2>
             <RegisterForm onSubmit={handleSubmit} />
           </div>
         </div>

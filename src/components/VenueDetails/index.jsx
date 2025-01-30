@@ -225,9 +225,14 @@ function VenueDetails({ isLoggedIn }) {
                 <span>Total Price:</span>
                 <span>${calculateTotalPrice()}</span>
               </div>
-              <button className="btn btn-primary mt-3" onClick={handleBookNow}>
-                Book now!
-              </button>
+              {isLoggedIn && (
+                <button
+                  className="btn btn-primary mt-3"
+                  onClick={handleBookNow}
+                >
+                  Book now!
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import EditVenueForm from "../EditVenueForm";
+import "../../styles/modal.css";
 
 function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
   if (!show) return null;
