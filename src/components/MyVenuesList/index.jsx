@@ -12,6 +12,7 @@ function MyVenuesList() {
   const fetchBookings = async () => {
     try {
       setLoading(true); // Show loading when fetching
+      console.log("TOKEN", localStorage.getItem("token"));
       const name = localStorage.getItem("name");
       if (!name) throw new Error("Name is not available in localStorage.");
 
