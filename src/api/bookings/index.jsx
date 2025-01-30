@@ -1,7 +1,4 @@
 const accessToken = localStorage.getItem("accessToken");
-
-console.log("!!!!!!", localStorage.getItem("accessToken"));
-
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/bookings";
 
 async function handleResponse(response) {
@@ -9,7 +6,6 @@ async function handleResponse(response) {
     // Extract error message if available
     const errorData = await response.json();
     const errorMessage = errorData.errors[0].message || "Something went wrong";
-    console.log("errorMessage", errorMessage);
     throw new Error(errorMessage);
   }
   return response.json();

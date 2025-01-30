@@ -13,7 +13,6 @@ function Bookings() {
         const name = localStorage.getItem("name");
         if (!name) throw new Error("Name is not available in localStorage.");
         const data = await getBookingsByProfile(name);
-        console.log(data.data);
         setData(data.data);
       } catch (err) {
         setError(err.message);

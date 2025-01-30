@@ -1,7 +1,4 @@
 const accessToken = localStorage.getItem("accessToken");
-console.log(accessToken);
-console.log(localStorage.getItem("name"));
-
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/venues";
 
 async function handleResponse(response) {

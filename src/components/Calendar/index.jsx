@@ -7,7 +7,6 @@ function BookingCalendar({ bookings, isLoggedIn, onDateChange }) {
   const [bookedDates, setBookedDates] = useState([]);
   const today = new Date();
 
-  console.log(isLoggedIn);
   useEffect(() => {
     const dates = bookings.flatMap((booking) => {
       const start = new Date(booking.dateFrom);

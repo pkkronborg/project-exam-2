@@ -21,7 +21,6 @@ function VenueList() {
       } else {
         responseData = await getAllVenues(page);
       }
-      console.log(responseData);
       setData(responseData.data);
       if (responseData.meta && responseData.meta.pageCount) {
         setTotalPages(responseData.meta.pageCount);
