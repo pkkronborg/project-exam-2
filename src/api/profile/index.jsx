@@ -1,5 +1,5 @@
 const accessToken = localStorage.getItem("accessToken");
-console.log("accessTOKEN:", accessToken);
+console.log(localStorage.getItem("accessToken"));
 
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/profiles";
 
