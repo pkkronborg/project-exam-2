@@ -32,7 +32,8 @@ function MyVenuesList() {
     fetchBookings();
   };
 
-  if (error) return <div className="my-5 text-center">Error: {error}</div>;
+  if (error)
+    return <div className="my-5 text-center text-danger">Error: {error}</div>;
 
   return (
     <div className="container px-0">
@@ -52,7 +53,7 @@ function MyVenuesList() {
           </div>
         </div>
       ) : error ? (
-        <div className="text-center mt-4 alert alert-danger">{error}</div>
+        <div className="text-center mt-4 text-danger">{error}</div>
       ) : data.length === 0 ? (
         <h3 className="mt-4 text-center">No venues, please create a venue!</h3>
       ) : (

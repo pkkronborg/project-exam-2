@@ -24,7 +24,7 @@ function VenueCard({ venue, children }) {
         )}
         <div className="card-body">
           <div className="d-flex justify-content-between align-items-center">
-            <h2 className="fw-bold m-0">{venue.name}</h2>
+            <h2 className="fw-bold m-0 text-truncate">{venue.name}</h2>
             <span className="text-warning fs-6">
               {renderStars(venue.rating)}
             </span>

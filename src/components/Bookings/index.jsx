@@ -34,7 +34,7 @@ function Bookings() {
           </div>
         </div>
       ) : error ? (
-        <div className="text-center mt-4 alert alert-danger">{error}</div>
+        <div className="text-center mt-4 text-danger">{error}</div>
       ) : data.length === 0 ? (
         <h3 className="mt-4 text-center">No bookings found</h3>
       ) : (

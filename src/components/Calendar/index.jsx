@@ -3,7 +3,12 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./styles.css";
 
-function BookingCalendar({ bookings, isLoggedIn, onDateChange }) {
+function BookingCalendar({
+  bookings,
+  isLoggedIn,
+  onDateChange,
+  setErrorMessage,
+}) {
   const [bookedDates, setBookedDates] = useState([]);
   const today = new Date();
 
@@ -38,11 +43,15 @@ function BookingCalendar({ bookings, isLoggedIn, onDateChange }) {
       });
 
       if (!rangeIsValid) {
-        alert("Selected range overlaps with already-booked dates!");
+        setErrorMessage("Selected range includes already booked dates!");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
         return;
       }
 
       onDateChange(selectedRange);
+      setErrorMessage("");
     }
   };
 

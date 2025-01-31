@@ -39,7 +39,7 @@ function VenueList() {
     getVenues(searchQuery, currentPage);
   }, [searchQuery, currentPage]);
 
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className="mt-5 text-danger">Error: {error}</div>;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -88,7 +88,7 @@ function VenueList() {
           </div>
         </div>
       ) : error ? (
-        <div className="text-center mt-4 alert alert-danger">{error}</div>
+        <div className="text-center mt-4 text-danger">{error}</div>
       ) : data.length === 0 ? (
         <h3 className="mt-4">No venues found</h3>
       ) : (

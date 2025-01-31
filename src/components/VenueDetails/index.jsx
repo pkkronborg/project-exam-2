@@ -18,6 +18,7 @@ import "./styles.css";
 function VenueDetails({ isLoggedIn }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [bookingError, setBookingError] = useState("");
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRange, setSelectedRange] = useState(null);
@@ -57,7 +58,7 @@ function VenueDetails({ isLoggedIn }) {
   }
 
   if (error) {
-    return <div className="text-center mt-4 alert alert-danger">{error}</div>;
+    return <div className="text-center mt-4 text-danger">{error}</div>;
   }
 
   if (!data) {
@@ -88,7 +89,10 @@ function VenueDetails({ isLoggedIn }) {
       const response = await book(bookingData);
       if (response) navigate("/myBookings");
     } catch (error) {
-      console.error("Booking failed:", error.message);
+      setBookingError(error.message);
+      setTimeout(() => {
+        setBookingError("");
+      }, 5000);
     }
   };
 
@@ -122,7 +126,7 @@ function VenueDetails({ isLoggedIn }) {
 
   return (
     <div className="mt-4">
-      <h1 className="my-5 text-center fw-bold">{data.name}</h1>
+      <h1 className="my-5 text-center fw-bold text-truncate">{data.name}</h1>
       {venueManager === "true" && name === data.owner?.name && (
         <div className="d-flex justify-content-start gap-2 my-3">
           <button
@@ -202,13 +206,17 @@ function VenueDetails({ isLoggedIn }) {
                   bookings={data.bookings || []}
                   isLoggedIn={isLoggedIn}
                   onDateChange={setSelectedRange}
+                  setErrorMessage={setBookingError}
                 />
               </div>
-              <p>
+
+              <div className="my-2">Selected dates:</div>
+
+              <div className="mb-2">
                 {selectedRange?.[0]?.toLocaleDateString()} -{" "}
                 {selectedRange?.[1]?.toLocaleDateString() ||
                   selectedRange?.[0]?.toLocaleDateString()}
-              </p>
+              </div>
               <div className="mb-3 d-flex justify-content-between align-items-center">
                 <label htmlFor="guestCount">Guests</label>
                 <input
@@ -222,13 +230,20 @@ function VenueDetails({ isLoggedIn }) {
                 />
               </div>
               <div className="d-flex justify-content-between fw-bold">
-                <span>Total Price:</span>
+                <span className="pe-1">Total Price: </span>
                 <span>${calculateTotalPrice()}</span>
               </div>
+
+              {bookingError && (
+                <div className="text-center mt-3 text-danger">
+                  {bookingError}
+                </div>
+              )}
               {isLoggedIn && (
                 <button
                   className="btn btn-primary mt-3"
                   onClick={handleBookNow}
+                  disabled={!selectedRange || !selectedRange.length}
                 >
                   Book now!
                 </button>

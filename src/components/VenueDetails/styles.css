@@ -4,6 +4,11 @@
   overflow-x: auto;
 }
 
+.btn:disabled {
+  background-color: grey;
+  border: none;
+}
+
 @media (max-width: 768px) {
   .booking-calendar {
     font-size: 0.7rem;
