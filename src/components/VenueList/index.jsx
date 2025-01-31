@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getAllVenues, getVenuesBySearch } from "../../api/venues";
 import "./styles.css";
+import Grid from "../Grid";
+import VenueCard from "../VenueCard";
 
 function VenueList() {
   const [data, setData] = useState([]);
@@ -58,15 +59,6 @@ function VenueList() {
     }
   };
 
-  const renderStars = (rating) => {
-    const totalStars = 5;
-    let stars = "";
-    for (let i = 1; i <= totalStars; i++) {
-      stars += i <= rating ? "★" : "☆";
-    }
-    return stars;
-  };
-
   return (
     <div className="mt-5">
       {
@@ -100,44 +92,19 @@ function VenueList() {
       ) : data.length === 0 ? (
         <h3 className="mt-4">No venues found</h3>
       ) : (
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mx-0">
-          {data.map((venue) => {
-            return (
-              <div key={venue.id} className="col mb-3">
-                <div className="card h-100 shadow-sm">
-                  {venue.media[0] && venue.media[0].url && (
-                    <img
-                      className="card-img-top img-fluid object-fit-cover"
-                      src={venue.media[0].url}
-                      alt={venue.media[0].alt || "Venue image"}
-                      style={{ height: "200px" }}
-                    />
-                  )}
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <h2 className="fw-bold m-0">{venue.name}</h2>
-                      <span className="text-warning fs-6">
-                        {renderStars(venue.rating)}
-                      </span>
-                    </div>
-
-                    <div className="d-flex justify-content-between text-muted small mt-2">
-                      <span>{venue.location.city || "No location"}</span>
-                      <span className="fw-bold text-dark">
-                        ${venue.price} / night
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-center pb-3">
-                    <Link to={`venue/${venue.id}`}>
-                      <button className="btn btn-primary">View venue</button>
-                    </Link>
-                  </div>
-                </div>
+        <Grid
+          items={data}
+          renderItem={(venue) => (
+            <VenueCard key={venue.id} venue={venue}>
+              <div className="d-flex justify-content-between text-muted small mt-2">
+                <span>{venue.location.city || "No location"}</span>
+                <span className="fw-bold text-dark">
+                  ${venue.price} / night
+                </span>
               </div>
-            );
-          })}
-        </div>
+            </VenueCard>
+          )}
+        />
       )}
 
       {totalPages > 1 && (
