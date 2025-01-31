@@ -52,7 +52,7 @@ function ProfileDetails() {
           </div>
         </div>
       ) : error ? (
-        <div className="text-center mt-5">{error}</div>
+        <div className="text-center mt-5 text-danger">{error}</div>
       ) : (
         <>
           <div className="d-flex flex-column align-items-center">
