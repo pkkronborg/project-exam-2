@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import EditVenueForm from "../EditVenueForm";
 import { updateVenue } from "../../api/venues";
 
-function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
+function EditVenueModal({ show, handleClose, initialValues, onUpdateSuccess }) {
   const [errorMessage, setErrorMessage] = useState("");
   if (!show) return null;
 
   const handleFormSubmit = async (formData) => {
     setErrorMessage("");
     try {
-      await updateVenue(formData);
+      await updateVenue(formData, initialValues.id);
       handleClose();
+      if (onUpdateSuccess) onUpdateSuccess();
     } catch (error) {
       setErrorMessage(error.message);
       setTimeout(() => {

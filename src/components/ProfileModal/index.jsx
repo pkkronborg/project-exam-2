@@ -11,7 +11,7 @@ const schema = yup.object().shape({
     .required("New picture URL is required"),
 });
 
-function ProfileModal({ currentAvatar, onClose, onSave, errorMessage }) {
+function ProfileModal({ onClose, onSave, errorMessage }) {
   const {
     register,
     handleSubmit,

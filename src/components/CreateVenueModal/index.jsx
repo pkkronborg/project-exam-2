@@ -14,7 +14,7 @@ function CreateVenueModal({ show, handleClose, onVenueCreated }) {
       await createVenue(data);
       onVenueCreated();
       handleClose();
-      navigate("../profile/myVenues");
+      navigate("../myVenues");
     } catch (error) {
       setErrorMessage(error.message);
       setTimeout(() => {

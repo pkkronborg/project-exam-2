@@ -49,7 +49,6 @@ function EditVenueForm({ initialValues, onSubmit, errorMessage }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -61,17 +60,14 @@ function EditVenueForm({ initialValues, onSubmit, errorMessage }) {
     },
   });
 
-  const mediaInput = watch("media", "");
-
-  const imageUrls = mediaInput
-    .split(",")
-    .map((url) => url.trim())
-    .filter((url) => url.length > 0);
-
   const handleFormSubmit = (data) => {
-    const mediaArray = imageUrls.map((url) => ({ url }));
-    const finalData = { ...data, media: mediaArray };
+    const mediaArray = data.media
+      .split(",") // Split comma-separated URLs
+      .map((url) => url.trim()) // Remove extra spaces
+      .filter((url) => url.length > 0) // Remove empty URLs
+      .map((url) => ({ url })); // Convert to object format
 
+    const finalData = { ...data, media: mediaArray };
     onSubmit(finalData);
   };
 

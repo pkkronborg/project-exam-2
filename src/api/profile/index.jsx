@@ -6,7 +6,7 @@ async function handleResponse(response) {
   if (!response.ok) {
     // Extract error message if available
     const errorData = await response.json();
-    const errorMessage = errorData.message || "Something went wrong";
+    const errorMessage = errorData.errors[0].message || "Something went wrong";
     throw new Error(errorMessage);
   }
   return response.json();
@@ -59,7 +59,7 @@ export async function updateProfile(name, data) {
     body: JSON.stringify(data),
   });
   if (!response.ok) {
-    throw new Error("Failed to update profile.");
+    throw new Error("Failed to update profile");
   }
 
   return response.json();

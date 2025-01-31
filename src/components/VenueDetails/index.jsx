@@ -4,7 +4,7 @@ import BookingCalendar from "../Calendar";
 import { book } from "../../api/bookings";
 import VenueBookings from "../VenueBookings";
 import EditVenueModal from "../EditVenueModal";
-import { deleteVenue, getVenueById, updateVenue } from "../../api/venues";
+import { deleteVenue, getVenueById } from "../../api/venues";
 import {
   FaBreadSlice,
   FaDog,
@@ -19,6 +19,7 @@ function VenueDetails({ isLoggedIn }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [bookingError, setBookingError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRange, setSelectedRange] = useState(null);
@@ -96,23 +97,14 @@ function VenueDetails({ isLoggedIn }) {
     }
   };
 
-  const handleEditVenue = async (formData) => {
-    try {
-      await updateVenue(formData, id);
-      setIsModalOpen(false);
-      fetchVenueDetails();
-    } catch (error) {
-      console.error("Update failed:", error.message);
-    }
-  };
-
   const handleDeleteVenue = async () => {
     try {
       await deleteVenue(id);
       setIsDeleteModalOpen(false);
       navigate("/myVenues");
     } catch (error) {
-      console.error("Delete failed:", error.message);
+      setDeleteError(error.message || "Failed to delete the venue");
+      setTimeout(() => setDeleteError(""), 5000);
     }
   };
 
@@ -313,6 +305,12 @@ function VenueDetails({ isLoggedIn }) {
               <h3 className="fw-bold">Delete Venue</h3>
               <p>Are you sure you want to delete the venue?</p>
 
+              {deleteError && (
+                <div className="text-danger text-center mt-3">
+                  {deleteError}
+                </div>
+              )}
+
               {/* Buttons */}
               <div className="d-flex justify-content-center gap-3 mt-3">
                 <button
@@ -343,7 +341,7 @@ function VenueDetails({ isLoggedIn }) {
         show={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
         initialValues={data}
-        onSubmit={handleEditVenue}
+        onUpdateSuccess={fetchVenueDetails}
       />
     </div>
   );
