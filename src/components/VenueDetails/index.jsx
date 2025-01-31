@@ -299,10 +299,7 @@ function VenueDetails({ isLoggedIn }) {
       </div>
 
       {isDeleteModalOpen && (
-        <div
-          className="modal fade show d-flex justify-content-center align-items-center"
-          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-        >
+        <div className="modal fade show d-flex justify-content-center align-items-center">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content p-4 text-center">
               {/* Close Button */}

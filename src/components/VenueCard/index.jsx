@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./styles.css";
 
 function VenueCard({ venue, children }) {
   const renderStars = (rating) => {
@@ -19,7 +20,6 @@ function VenueCard({ venue, children }) {
             className="card-img-top img-fluid object-fit-cover"
             src={venue.media[0].url}
             alt={venue.media[0].alt || "Venue image"}
-            style={{ height: "200px" }}
           />
         )}
         <div className="card-body">

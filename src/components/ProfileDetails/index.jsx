@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getSingleProfile, updateProfile } from "../../api/profile";
 import ProfileModal from "../ProfileModal";
+import "./styles.css";
 
 function ProfileDetails() {
   const [profile, setProfile] = useState(null);
@@ -61,10 +62,9 @@ function ProfileDetails() {
 
             {profile?.avatar?.url && (
               <img
-                className="img-fluid rounded shadow my-3"
+                className="img-fluid rounded shadow my-3 avatar-image"
                 src={profile.avatar.url}
                 alt={profile.avatar.alt || "Profile image"}
-                style={{ width: "250px", height: "250px", objectFit: "cover" }}
               />
             )}
 

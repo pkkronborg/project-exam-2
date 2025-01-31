@@ -25,7 +25,6 @@ function LoginModal({ show, handleClose }) {
   return (
     <div
       className="modal fade show"
-      style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       tabIndex="-1"
       aria-labelledby="loginModalLabel"
     >

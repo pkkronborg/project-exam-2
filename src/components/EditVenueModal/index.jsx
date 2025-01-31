@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import EditVenueForm from "../EditVenueForm";
-import "../../styles/modal.css";
 import { updateVenue } from "../../api/venues";
 
 function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
@@ -21,10 +20,7 @@ function EditVenueModal({ show, handleClose, initialValues, onSubmit }) {
   };
 
   return (
-    <div
-      className="modal fade show d-flex justify-content-center align-items-center"
-      style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-    >
+    <div className="modal fade show d-flex justify-content-center align-items-center">
       <div className="modal-dialog modal-xl modal-dialog-centered">
         <div className="modal-content p-4">
           <div className="modal-header border-0">

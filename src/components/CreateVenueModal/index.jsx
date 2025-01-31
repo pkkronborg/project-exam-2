@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createVenue } from "../../api/venues";
 import CreateVenueForm from "../CreateVenueForm";
-import "../../styles/modal.css";
 import { useNavigate } from "react-router-dom";
 
 function CreateVenueModal({ show, handleClose, onVenueCreated }) {
@@ -27,7 +26,6 @@ function CreateVenueModal({ show, handleClose, onVenueCreated }) {
   return (
     <div
       className="modal fade show d-flex justify-content-center align-items-center"
-      style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       tabIndex="-1"
       aria-labelledby="registerVenueModal"
     >
