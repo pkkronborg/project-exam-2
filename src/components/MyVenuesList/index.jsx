@@ -15,9 +15,6 @@ function MyVenuesList() {
       setLoading(true); // Show loading when fetching
       const name = localStorage.getItem("name");
       if (!name) throw new Error("Name is not available in localStorage.");
-
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-
       const response = await getVenuesMadeByProfile(name);
       setData(response.data);
     } catch (err) {

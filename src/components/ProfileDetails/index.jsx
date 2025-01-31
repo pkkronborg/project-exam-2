@@ -46,13 +46,13 @@ function ProfileDetails() {
   return (
     <div className="text-center">
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className="d-flex justify-content-center align-items-center mt-5">
+          <div className="spinner-border text-primary mt-4" role="status">
+            <span className="visually-hidden mt-5">Loading...</span>
           </div>
         </div>
       ) : error ? (
-        <div className="text-center mt-4 alert alert-danger">{error}</div>
+        <div className="text-center mt-5">{error}</div>
       ) : (
         <>
           <div className="d-flex flex-column align-items-center">
