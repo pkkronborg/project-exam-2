@@ -90,7 +90,7 @@ function Nav({ closeMenu }) {
         </Link>
       </li>
       <li className="nav-item">
-        <button className="btn btn-link nav-link" onClick={handleLogout}>
+        <button className="btn nav-link text-start" onClick={handleLogout}>
           Log Out
         </button>
       </li>

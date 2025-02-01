@@ -54,7 +54,7 @@
 @media (max-width: 992px) {
   .nav-item {
     width: 100%;
-    text-align: center;
+    text-align: start;
   }
 
   .nav-link {
