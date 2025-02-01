@@ -15,12 +15,16 @@ function VenueCard({ venue, children }) {
   return (
     <div className="col">
       <div className="card h-100 shadow-sm">
-        {venue.media?.[0]?.url && (
+        {venue.media?.[0]?.url ? (
           <img
-            className="card-img-top img-fluid object-fit-cover"
+            className="card-img-top img-fluid object-fit-cover placeholder-img"
             src={venue.media[0].url}
             alt={venue.media[0].alt || "Venue image"}
           />
+        ) : (
+          <div className="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+            Image coming soon...
+          </div>
         )}
         <div className="card-body">
           <div className="d-flex justify-content-between align-items-center">

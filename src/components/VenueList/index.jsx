@@ -66,15 +66,18 @@ function VenueList() {
           className="mb-4 d-flex justify-content-center"
           onSubmit={handleSearch}
         >
-          <div className="input-group w-50">
+          <div className="input-group w-50 my-5">
             <input
               type="text"
-              className="form-control"
+              className="form-control border border-dark"
               placeholder="Search for venues..."
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
-            <button className="btn btn-primary" type="submit">
+            <button
+              className="btn btn-primary border border-dark"
+              type="submit"
+            >
               Search
             </button>
           </div>
@@ -110,7 +113,7 @@ function VenueList() {
       {totalPages > 1 && (
         <div className="d-flex justify-content-center align-items-center mt-4">
           <button
-            className="btn btn-secondary me-2"
+            className="btn btn-dark me-2"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
@@ -120,7 +123,7 @@ function VenueList() {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            className="btn btn-secondary ms-2"
+            className="btn btn-dark ms-2"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >

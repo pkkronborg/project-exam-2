@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap");
+
 body {
   background-color: #f5f5f5;
   overflow-y: scroll;
@@ -14,6 +16,41 @@ body {
   opacity: 0.7;
 }
 
+.btn-danger {
+  background-color: var(--bs-danger);
+  border-color: var(--bs-danger);
+}
+
+.btn-danger:hover {
+  background-color: var(--bs-danger);
+  border-color: var(--bs-danger);
+  opacity: 0.7;
+}
+
+.btn-warning {
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
+}
+
+.btn-warning:hover {
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
+  opacity: 0.7;
+}
+
+.btn-secondary {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
+  color: black;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
+  color: black;
+  opacity: 0.7;
+}
+
 body {
   font-family: "Open sans", sans-serif;
 }
@@ -23,7 +60,8 @@ a {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: "Montserrat", sans-serif;
 }
 

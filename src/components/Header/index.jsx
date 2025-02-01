@@ -1,59 +1,10 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useAuth } from "../../state/auth";
 import "./styles.css";
 
-function Nav({ onRegisterClick, onLoginClick, closeMenu }) {
-  const { isLoggedIn, venueManager, logout } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    closeMenu();
-    navigate("/");
-  };
-
-  const navItems = [
-    { path: "/myProfile", label: "My Profile", show: isLoggedIn },
-    { path: "/myBookings", label: "My Bookings", show: isLoggedIn },
-    { path: "/myVenues", label: "My Venues", show: isLoggedIn && venueManager },
-    { action: onRegisterClick, label: "Register", show: !isLoggedIn },
-    { action: onLoginClick, label: "Log in", show: !isLoggedIn },
-    { action: handleLogout, label: "Log out", show: isLoggedIn },
-  ];
-
-  return (
-    <nav>
-      <ul className="nav ms-auto">
-        {navItems
-          .filter((item) => item.show)
-          .map((item, index) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <li className="nav-item" key={index}>
-                {item.path ? (
-                  <Link
-                    className={`nav-link ${isActive ? "active" : ""}`}
-                    to={item.path}
-                    onClick={closeMenu}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button className="btn nav-link" onClick={item.action}>
-                    {item.label}
-                  </button>
-                )}
-              </li>
-            );
-          })}
-      </ul>
-    </nav>
-  );
-}
-
 function Header({ onRegisterClick, onLoginClick }) {
+  const { isLoggedIn } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -67,27 +18,83 @@ function Header({ onRegisterClick, onLoginClick }) {
   return (
     <nav className="navbar navbar-expand-lg bg-primary fixed-top">
       <div className="container">
+        {/* Logo */}
         <Link className="navbar-brand fw-bold" to="/" onClick={closeMenu}>
           Holidaze
         </Link>
 
-        <button className="navbar-toggler" type="button" onClick={toggleMenu}>
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        {/* Show Log In (Button) & Register (Link) ONLY IF NOT LOGGED IN */}
+        {!isLoggedIn && (
+          <div className="d-flex gap-2 align-items-center">
+            <button
+              className="btn btn-warning text-dark fw-bold px-3"
+              onClick={onLoginClick}
+            >
+              Log In
+            </button>
 
-        <div
-          className={`collapse navbar-collapse justify-content-end ${
-            isOpen ? "show" : ""
-          }`}
-        >
-          <Nav
-            onRegisterClick={onRegisterClick}
-            onLoginClick={onLoginClick}
-            closeMenu={closeMenu}
-          />
-        </div>
+            <button
+              className="btn nav-link nav-item ms-lg-3"
+              onClick={onRegisterClick}
+            >
+              Register
+            </button>
+          </div>
+        )}
+
+        {/* Show Hamburger Menu ONLY IF LOGGED IN */}
+        {isLoggedIn && (
+          <button className="navbar-toggler" type="button" onClick={toggleMenu}>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        )}
+
+        {/* Navbar Links (ONLY IF LOGGED IN) */}
+        {isLoggedIn && (
+          <div
+            className={`collapse navbar-collapse justify-content-end ${
+              isOpen ? "show" : ""
+            }`}
+          >
+            <Nav closeMenu={closeMenu} />
+          </div>
+        )}
       </div>
     </nav>
+  );
+}
+
+function Nav({ closeMenu }) {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    closeMenu();
+  };
+
+  return (
+    <ul className="nav ms-auto">
+      <li className="nav-item">
+        <Link className="nav-link" to="/myProfile" onClick={closeMenu}>
+          My Profile
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/myBookings" onClick={closeMenu}>
+          My Bookings
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/myVenues" onClick={closeMenu}>
+          My Venues
+        </Link>
+      </li>
+      <li className="nav-item">
+        <button className="btn btn-link nav-link" onClick={handleLogout}>
+          Log Out
+        </button>
+      </li>
+    </ul>
   );
 }
 

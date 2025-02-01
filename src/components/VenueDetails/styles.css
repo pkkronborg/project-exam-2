@@ -9,22 +9,26 @@
   border: none;
 }
 
-@media (max-width: 768px) {
-  .booking-calendar {
-    font-size: 0.7rem;
-  }
+.media {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
-  .venue-section {
-    margin-bottom: 20px; /* Adds space between sections */
+  h2 {
+    text-align: center;
+  }
+
+  .booking-calendar {
+    font-size: 0.7rem;
   }
 
   .venue-image {
-    margin-bottom: 15px; /* Space between image and calendar */
+    margin-bottom: 2rem;
   }
 
   .venue-info {
-    padding: 10px 12px; /* Adds padding around text areas */
+    padding: 10px 12px;
   }
 }

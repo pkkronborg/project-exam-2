@@ -46,6 +46,10 @@
   color: white;
 }
 
+.btn-warning {
+  white-space: nowrap;
+}
+
 /* Small devices, drop down menu */
 @media (max-width: 992px) {
   .nav-item {

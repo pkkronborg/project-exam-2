@@ -112,8 +112,11 @@ function VenueDetails({ isLoggedIn }) {
     if (!selectedRange?.[0] || !selectedRange?.[1]) return 0;
     const startDate = new Date(selectedRange[0]);
     const endDate = new Date(selectedRange[1]);
-    const numberOfDays = Math.ceil((endDate - startDate) / (1000 * 3600 * 24));
-    return numberOfDays * data.price;
+    const numberOfDays = Math.max(
+      1,
+      Math.ceil((endDate - startDate) / (1000 * 3600 * 24))
+    );
+    return (numberOfDays - 1) * data.price;
   };
 
   return (
@@ -152,7 +155,7 @@ function VenueDetails({ isLoggedIn }) {
                   >
                     <img
                       src={image.url}
-                      className="d-block w-100 img-fluid object-fit-cover rounded"
+                      className="d-block w-100 img-fluid object-fit-cover rounded media"
                       alt={image.alt || "Venue image"}
                     />
                   </div>
@@ -186,13 +189,16 @@ function VenueDetails({ isLoggedIn }) {
               )}
             </div>
           ) : (
-            <p>No images available</p>
+            <div className="media d-flex align-items-center justify-content-center border border-dark rounded text-muted">
+              Image coming soon...
+            </div>
           )}
         </div>
 
         <div className="col-md-6 d-flex align-items-center justify-content-center">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column align-items-center">
+              <h3 className="fw-bold">${data.price} per night</h3>
               <div className="booking-calendar">
                 <BookingCalendar
                   bookings={data.bookings || []}
@@ -233,7 +239,7 @@ function VenueDetails({ isLoggedIn }) {
               )}
               {isLoggedIn && (
                 <button
-                  className="btn btn-primary mt-3"
+                  className="btn btn-primary mt-3 fw-bold"
                   onClick={handleBookNow}
                   disabled={!selectedRange || !selectedRange.length}
                 >
@@ -245,7 +251,7 @@ function VenueDetails({ isLoggedIn }) {
         </div>
       </div>
 
-      <div className="row">
+      <div className="row property-info">
         <h2 className="my-4">About this property</h2>
         <div className="col-md-3 text-start venue-section venue-info">
           <p>

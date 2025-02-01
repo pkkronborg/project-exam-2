@@ -1,5 +1,5 @@
-.input-group {
-  width: 90%;
+.btn-dark {
+  background-color: black;
 }
 
 @media (max-width: 768px) {

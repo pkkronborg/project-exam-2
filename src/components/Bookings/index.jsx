@@ -44,7 +44,7 @@ function Bookings() {
             <VenueCard key={booking.id} venue={booking.venue}>
               <div className="d-flex justify-content-center mt-2">
                 <span>
-                  {new Date(booking.dateFrom).toLocaleDateString()} -
+                  {new Date(booking.dateFrom).toLocaleDateString()} -{" "}
                   {new Date(booking.dateTo).toLocaleDateString()}
                 </span>
               </div>
