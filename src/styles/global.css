@@ -57,6 +57,11 @@ body {
   opacity: 0.7;
 }
 
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
 body {
   font-family: "Open sans", sans-serif;
 }
