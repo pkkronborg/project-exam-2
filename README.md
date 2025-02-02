@@ -4,7 +4,7 @@
 A newly launched accommodation booking site called Holidaze requested me to develop a brand new front end for their application.
 
 # Description
-This is my Project Exam 2. The website is built with HTML, CSS, JS, Bootstrap
+This is my Project Exam 2. The website is built with React, Bootstap, React Calendar and Yup for form validation.
 
 There are 5 pages: home with all listings, detail page, bookings, venues and profile page.
 
