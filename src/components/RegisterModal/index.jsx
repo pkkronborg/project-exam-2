@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import RegisterForm from "../RegisterForm";
 import { register } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function RegisterModal({ show, handleClose }) {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   if (!show) return null; // Render nothing if the modal is not visible
 
   const handleSubmit = async (data) => {
@@ -11,7 +15,7 @@ function RegisterModal({ show, handleClose }) {
     try {
       const response = await register(data);
       console.log("Registration successful:", response);
-      handleClose();
+      setSuccessMessage("Registration successful! You can now log in.");
     } catch (error) {
       setErrorMessage(error.message);
       setTimeout(() => {
@@ -38,7 +42,24 @@ function RegisterModal({ show, handleClose }) {
           </div>
           <div className="modal-body">
             <h2 className="text-center mb-4">Register</h2>
-            <RegisterForm onSubmit={handleSubmit} errorMessage={errorMessage} />
+            {successMessage ? (
+              <div>
+                <div className="text-center">{successMessage}</div>
+                <div className="d-flex justify-content-center mt-3">
+                  <button
+                    className="btn btn-primary mt-3"
+                    onClick={() => handleClose()} // ✅ Go to login page
+                  >
+                    OK!
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <RegisterForm
+                onSubmit={handleSubmit}
+                errorMessage={errorMessage}
+              />
+            )}
           </div>
         </div>
       </div>
