@@ -1,4 +1,3 @@
-const accessToken = localStorage.getItem("accessToken");
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/venues";
 
 async function handleResponse(response) {
@@ -12,6 +11,7 @@ async function handleResponse(response) {
 }
 
 export async function createVenue(data) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}`, {
     method: "POST",
     headers: {
@@ -25,6 +25,7 @@ export async function createVenue(data) {
 }
 
 export async function updateVenue(data, id) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
     headers: {
@@ -38,6 +39,7 @@ export async function updateVenue(data, id) {
 }
 
 export async function deleteVenue(id) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
     headers: {

@@ -1,4 +1,3 @@
-const accessToken = localStorage.getItem("accessToken");
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/bookings";
 
 async function handleResponse(response) {
@@ -12,6 +11,7 @@ async function handleResponse(response) {
 }
 
 export async function book(data) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}`, {
     method: "POST",
     headers: {

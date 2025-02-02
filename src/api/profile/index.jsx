@@ -1,5 +1,3 @@
-const accessToken = localStorage.getItem("accessToken");
-
 const BASE_URL = "https://v2.api.noroff.dev/holidaze/profiles";
 
 async function handleResponse(response) {
@@ -13,6 +11,7 @@ async function handleResponse(response) {
 }
 
 export async function getSingleProfile(name) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${name}`, {
     method: "GET",
     headers: {
@@ -25,6 +24,7 @@ export async function getSingleProfile(name) {
 }
 
 export async function getVenuesMadeByProfile(name) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${name}/venues`, {
     method: "GET",
     headers: {
@@ -37,6 +37,7 @@ export async function getVenuesMadeByProfile(name) {
 }
 
 export async function getBookingsByProfile(name) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${name}/bookings?_venue=true`, {
     method: "GET",
     headers: {
@@ -49,6 +50,7 @@ export async function getBookingsByProfile(name) {
 }
 
 export async function updateProfile(name, data) {
+  const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${BASE_URL}/${name}`, {
     method: "PUT",
     headers: {
