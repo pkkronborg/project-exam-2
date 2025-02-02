@@ -10,6 +10,12 @@ body {
   border-color: var(--bs-primary);
 }
 
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #27632a !important;
+  border-color: #27632a !important;
+}
+
 .btn-primary:hover {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);

@@ -7,7 +7,7 @@ async function handleResponse(response) {
   if (!response.ok) {
     // Extract error message if available
     const errorData = await response.json();
-    const errorMessage = errorData.message || "Something went wrong";
+    const errorMessage = errorData.errors[0].message || "Something went wrong";
     throw new Error(errorMessage);
   }
   return response.json();
