@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import RegisterForm from "../RegisterForm";
 import { register } from "../../api/auth";
-import { useNavigate } from "react-router-dom";
 
 function RegisterModal({ show, handleClose }) {
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -22,6 +20,12 @@ function RegisterModal({ show, handleClose }) {
         setErrorMessage("");
       }, 5000);
     }
+  };
+
+  const handleModalClose = () => {
+    setSuccessMessage("");
+    setErrorMessage("");
+    handleClose();
   };
 
   return (
@@ -47,8 +51,8 @@ function RegisterModal({ show, handleClose }) {
                 <div className="text-center">{successMessage}</div>
                 <div className="d-flex justify-content-center mt-3">
                   <button
-                    className="btn btn-primary mt-3"
-                    onClick={() => handleClose()} // ✅ Go to login page
+                    className="btn btn-primary"
+                    onClick={handleModalClose}
                   >
                     OK!
                   </button>
