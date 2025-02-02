@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { useAuth } from "../../state/auth";
 import "./styles.css";
@@ -65,30 +65,53 @@ function Header({ onRegisterClick, onLoginClick }) {
 }
 
 function Nav({ closeMenu }) {
-  const { logout } = useAuth();
+  const { logout, venueManager } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     closeMenu();
+    navigate("/");
   };
 
   return (
     <ul className="nav ms-auto">
       <li className="nav-item">
-        <Link className="nav-link" to="/myProfile" onClick={closeMenu}>
+        <Link
+          className={`nav-link ${
+            location.pathname === "/myProfile" ? "active" : ""
+          }`}
+          to="/myProfile"
+          onClick={closeMenu}
+        >
           My Profile
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/myBookings" onClick={closeMenu}>
+        <Link
+          className={`nav-link ${
+            location.pathname === "/myBookings" ? "active" : ""
+          }`}
+          to="/myBookings"
+          onClick={closeMenu}
+        >
           My Bookings
         </Link>
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/myVenues" onClick={closeMenu}>
-          My Venues
-        </Link>
-      </li>
+      {venueManager && (
+        <li className="nav-item">
+          <Link
+            className={`nav-link ${
+              location.pathname === "/myVenues" ? "active" : ""
+            }`}
+            to="/myVenues"
+            onClick={closeMenu}
+          >
+            My Venues
+          </Link>
+        </li>
+      )}
       <li className="nav-item">
         <button className="btn nav-link text-start" onClick={handleLogout}>
           Log Out
