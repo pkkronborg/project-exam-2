@@ -1,6 +1,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5043b3df-4758-4e39-974c-e38637c08d39/deploy-status)](https://app.netlify.com/sites/cheery-gnome-f2c48c/deploys)
 
 # Holidaze
+![Holidaze](https://github.com/user-attachments/assets/a778f5ee-05ec-4597-ae05-9622d9a77762)
+
 A newly launched accommodation booking site called Holidaze requested me to develop a brand new front end for their application.
 
 # Description
@@ -30,10 +32,27 @@ The client has specified the following requirements in the form of User Stories:
 
 
 # Getting started
+
 ## Installing 
 Clone the repo
 
-## Run
-1. npm install
-2. npm run start
+```bash
+git clone https://github.com/pkkronborg/project-exam-2.git
+```
 
+Install dependcies
+
+```
+npm install
+```
+
+
+## Run
+
+```bash
+npm run start
+```
+
+## Contact
+
+[My LinkedIn page](https://no.linkedin.com/in/per-kristian-kronborg)
